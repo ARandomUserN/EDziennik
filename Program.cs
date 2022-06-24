@@ -19,7 +19,7 @@ namespace EDziennik
         {
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
-            {
+            { 
                 var services = scope.ServiceProvider;
                 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 try
@@ -28,6 +28,7 @@ namespace EDziennik
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await ContextSeed.SeedRolesAsync(userManager, roleManager);
+                    await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
