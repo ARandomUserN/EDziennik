@@ -46,6 +46,7 @@ namespace EDziennik.Data
             {
                 entity.ToTable("UserTokens");
             });
+            builder.Entity<ApplicationUser>().HasMany(u => u.Marks).WithOne(m => m.student);
         }
     }
 }
