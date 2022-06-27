@@ -1,4 +1,5 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
+@using EDziennik.Models
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

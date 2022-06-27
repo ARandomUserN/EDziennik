@@ -48,5 +48,6 @@ namespace EDziennik.Data
             });
             builder.Entity<ApplicationUser>().HasMany(u => u.Marks).WithOne(m => m.student);
         }
+        public DbSet<EDziennik.Models.Mark> Mark { get; set; }
     }
 }

@@ -15,10 +15,13 @@
     <tbody>
         @foreach (var user in Model)
         {
-            <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-            </tr>
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="Marks" asp-action="Index" asp-route-userId="@user.UserId">Marks</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

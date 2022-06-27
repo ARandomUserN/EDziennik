@@ -30,6 +30,7 @@ namespace EDziennik.Models
                 if (roles.Contains("Student"))
                 {
                     StudentsViewModel st = new StudentsViewModel();
+                    st.UserId = user.Id;
                     st.FirstName = user.FirstName;
                     st.LastName = user.LastName;
                     studentsList.Add(st);
