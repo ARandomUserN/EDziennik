@@ -58,6 +58,8 @@ namespace EDziennik.Controllers
                 return RedirectToAction("PageNotFound", "Error");
             }
 
+            
+
             var mark = await _context.Mark
                 .Include(m => m.student)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -65,7 +67,9 @@ namespace EDziennik.Controllers
             {
                 return RedirectToAction("PageNotFound", "Error");
             }
-            ViewData["userId"] = userId;
+
+            
+            ViewData["userId"] = mark.studentId;
             return View(mark);
         }
 
@@ -73,8 +77,17 @@ namespace EDziennik.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult Create(string userId)
         {
-            ViewData["userId"] = userId;
-            return View();
+            try
+            {
+                var student = from u in _context.Users where u.Id == userId select u;
+                ViewData["userId"] = student.First().Id;
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Error");
+            }
+            
         }
 
         // POST: Marks/Create
@@ -110,9 +123,17 @@ namespace EDziennik.Controllers
             {
                 return RedirectToAction("PageNotFound", "Error");
             }
-            ViewData["userId"] = userId;
             ViewData["studentId"] = new SelectList(_context.Users, "Id", "Id", mark.studentId);
-            return View();
+            try
+            {
+                var student = from u in _context.Users where u.Id == userId select u;
+                ViewData["userId"] = student.First().Id;
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Error");
+            }
         }
 
         [Authorize(Roles = "Teacher")]
@@ -149,6 +170,8 @@ namespace EDziennik.Controllers
                 return RedirectToAction("Index", new { userId = mark.studentId });
             }
             ViewData["studentId"] = new SelectList(_context.Users, "Id", "Id", mark.studentId);
+            
+
             return RedirectToAction("Index", new { userId = mark.studentId });
         }
         [Authorize(Roles = "Teacher")]
@@ -164,7 +187,16 @@ namespace EDziennik.Controllers
             {
                 return RedirectToAction("PageNotFound", "Error");
             }
-            ViewData["userId"] = userId;
+            try
+            {
+                var student = from u in _context.Users where u.Id == userId select u;
+                ViewData["userId"] = student.First().Id;
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Error");
+            }
             return View();
         }
         [Authorize(Roles = "Teacher")]
