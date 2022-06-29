@@ -10,6 +10,7 @@ namespace EDziennik.Models
         public int Id { get; set; }
         public int value { get; set; }
         public string description { get; set; }
+        public string studentId { get; set; }
         public ApplicationUser student { get; set; }
     }
 }

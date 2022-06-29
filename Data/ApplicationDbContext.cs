@@ -46,7 +46,7 @@ namespace EDziennik.Data
             {
                 entity.ToTable("UserTokens");
             });
-            builder.Entity<ApplicationUser>().HasMany(u => u.Marks).WithOne(m => m.student);
+            builder.Entity<ApplicationUser>().HasMany(u => u.Marks).WithOne(m => m.student).IsRequired(); ;
         }
         public DbSet<EDziennik.Models.Mark> Mark { get; set; }
     }

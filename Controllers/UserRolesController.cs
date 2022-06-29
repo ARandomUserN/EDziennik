@@ -74,8 +74,10 @@ namespace EDziennik.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
+
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {

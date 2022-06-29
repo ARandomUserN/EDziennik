@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace EDziennik.Models
             _roleManager = roleManager;
             _userManager = userManager;
         }
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Index()
         {
             var students = await _userManager.Users.ToListAsync();

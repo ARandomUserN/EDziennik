@@ -23,7 +23,39 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About me</a>
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Manage roles</a>
+                                }
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="UserRoles" asp-action="Index">Manage users</a>
+                                }
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                if (User.IsInRole("Teacher"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student list</a>
+                                }
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                if (User.IsInRole("Student"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="StudentMarks" asp-action="Index">My marks</a>
+                                }
+                            }
                         </li>
                     </ul>
                 </div>

@@ -4,14 +4,16 @@ using EDziennik.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EDziennik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220628092018_StudentID fix")]
+    partial class StudentIDfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +103,10 @@ namespace EDziennik.Migrations
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("studentId")
+                    b.Property<int>("studentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("studentId1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -110,7 +115,7 @@ namespace EDziennik.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("studentId");
+                    b.HasIndex("studentId1");
 
                     b.ToTable("Mark");
                 });
@@ -302,7 +307,7 @@ namespace EDziennik.Migrations
                 {
                     b.HasOne("EDziennik.Models.ApplicationUser", "student")
                         .WithMany("Marks")
-                        .HasForeignKey("studentId")
+                        .HasForeignKey("studentId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

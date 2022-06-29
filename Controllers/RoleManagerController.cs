@@ -26,6 +26,7 @@ namespace EDziennik.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole(string roleName)
         {
+            
             if (roleName != null)
             {
                 await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));

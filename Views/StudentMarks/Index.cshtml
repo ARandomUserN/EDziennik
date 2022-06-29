@@ -1,0 +1,25 @@
+﻿@model List<EDziennik.Models.Mark>
+@{
+    ViewData["Title"] = "Marks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h1>Marks</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mark</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.value</td>
+                    <td>@item.description</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
